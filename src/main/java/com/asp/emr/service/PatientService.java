@@ -10,5 +10,5 @@ public interface PatientService {
 
 	public List<Patient> getAllPatients();
 	
-	public void addPatient(int MRnum,Patient patient) ;
+	public void addPatient(Patient patient) ;
 }

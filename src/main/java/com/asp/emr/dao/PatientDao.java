@@ -8,5 +8,5 @@ public interface PatientDao {
 	
 public List<Patient> getAllPatients();
 
-public void addPatient(int MRnum,Patient patient) ;	
+public void addPatient(Patient patient) ;	
 }

@@ -20,7 +20,7 @@ public class PatientDaoImpl implements PatientDao {
 	}
 
 	@Override
-	public void addPatient(int MRnum, Patient patient) {
+	public void addPatient(Patient patient) {
 		this.patientRepository.save(patient);
 	}
 

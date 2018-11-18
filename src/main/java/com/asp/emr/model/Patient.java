@@ -4,14 +4,16 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity(name="patientRegistration")
 public class Patient {
 
-	@Column
+	@Column(updatable = false, nullable = false,name="mrnum")
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int MRnum;
 	@Column
 	private String firstName;

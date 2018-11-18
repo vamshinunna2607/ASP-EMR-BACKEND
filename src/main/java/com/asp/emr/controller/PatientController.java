@@ -22,16 +22,11 @@ public class PatientController {
 
 	@Autowired
 	PatientService patientService;
-	
-	@GetMapping("/v")
-	public String hello() {
-		return "vaish";
-	}
-	
-	@RequestMapping(value = "/addPatient/{MRnum}", method = RequestMethod.POST)
+		
+	@RequestMapping(value = "/addPatient", method = RequestMethod.POST)
 	@CrossOrigin(origins = "http://localhost:4200")
-	public void addPatient(@PathVariable int MRnum, @RequestBody Patient patient) {
-		this.patientService.addPatient(MRnum, patient);
+	public void addPatient(@RequestBody Patient patient) {
+		this.patientService.addPatient(patient);
 	}
 	
 	@GetMapping("/allPatients")

@@ -23,9 +23,9 @@ public class PatientServiceImpl implements PatientService{
 	}
 
 	@Override
-	public void addPatient(int MRnum, Patient patient) {
+	public void addPatient(Patient patient) {
 		
-		this.patientDao.addPatient(MRnum, patient);
+		this.patientDao.addPatient(patient);
 	}
 
 }

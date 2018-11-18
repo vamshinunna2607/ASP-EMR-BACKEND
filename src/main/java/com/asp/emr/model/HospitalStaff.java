@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name="MedicalstaffRegistration")
-public class HospitalStaff {
+public class HospitalStaff  {
 
 	@Column
 	private String firstName;
@@ -30,7 +30,7 @@ public class HospitalStaff {
 	@Column
 	private int roleID;
 	@Id
-	@Column
+	@Column(name="email")
 	private String email;
 	@Column
 	private String password;
