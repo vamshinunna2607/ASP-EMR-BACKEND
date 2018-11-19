@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,5 +29,10 @@ public class AppointmentController {
 	@GetMapping("/appointment/date/{appDate}")
 	public List<Appointment> findByDate(@PathVariable("appDate") Date date) {
 		return appointmentService.findByDate(date);
+	}
+	
+	@PostMapping("/createAppointment")
+	public void createAppointment(@RequestBody Appointment appointment) {
+		appointmentService.createAppointment(appointment);
 	}
 }

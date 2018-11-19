@@ -27,4 +27,9 @@ public class AppointmentDaoImpl implements AppointmentDao {
 		}
 		return list;
 	}
+
+	@Override
+	public void createAppointment(Appointment appointment) {
+		appointmentsRepository.save(appointment);
+	}
 }

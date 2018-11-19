@@ -16,7 +16,11 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity(name="Appointments")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -39,13 +43,18 @@ public class Appointment {
 	@Column
 	private String lastMedication;
 
-	@ManyToOne(fetch=FetchType.EAGER,targetEntity = Patient.class, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,targetEntity = Patient.class)
 	@JoinColumn(name = "mrnum")
-	@Fetch(FetchMode.SELECT)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="mrnum")
+	@JsonProperty(value = "mrnum")
+	@JsonIdentityReference(alwaysAsId = true)
 	private Patient patient;
 
 	@ManyToOne(fetch=FetchType.EAGER, targetEntity= HospitalStaff.class)
 	@JoinColumn(name = "email")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="email")
+	@JsonProperty(value = "email")
+	@JsonIdentityReference(alwaysAsId = true)
 	private HospitalStaff hospitalStaff;
 
 	public Appointment() {

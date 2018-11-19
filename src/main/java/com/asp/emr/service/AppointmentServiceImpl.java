@@ -27,4 +27,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return appointmentDao.findByDate(date);
 	}
 
+	@Override
+	public void createAppointment(Appointment appointment) {
+		appointmentDao.createAppointment(appointment);		
+	}
+
 }
