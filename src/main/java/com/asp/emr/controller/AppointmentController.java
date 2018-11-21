@@ -1,9 +1,11 @@
 package com.asp.emr.controller;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,17 +22,25 @@ public class AppointmentController {
 
 	@Autowired
 	AppointmentService appointmentService;
-	
+
 	@GetMapping("/appointment/{appID}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Appointment findAppointment(@PathVariable("appID") int id) {
 		return appointmentService.findAppointment(id);
 	}
-	
+
 	@GetMapping("/appointment/date/{appDate}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Appointment> findByDate(@PathVariable("appDate") Date date) {
 		return appointmentService.findByDate(date);
 	}
-	
+
+	@GetMapping("/today")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Appointment> getAppointmentsForToday() {
+		return appointmentService.findByDate(new Date(System.currentTimeMillis()));
+	}
+
 	@PostMapping("/createAppointment")
 	public void createAppointment(@RequestBody Appointment appointment) {
 		appointmentService.createAppointment(appointment);

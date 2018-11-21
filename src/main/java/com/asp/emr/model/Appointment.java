@@ -1,9 +1,8 @@
 package com.asp.emr.model;
 
+import java.sql.Date;
 import java.sql.Time;
-import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,20 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
+import com.asp.emr.enums.AppointmentStatus;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@Entity(name="Appointments")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Entity(name = "Appointments")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Appointment {
 
-	@Column(updatable = false, nullable = false,name="appid")
+	@Column(updatable = false, nullable = false, name = "appid")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int appID;
@@ -42,17 +39,19 @@ public class Appointment {
 	private String healthStatus;
 	@Column
 	private String lastMedication;
+	@Column
+	private AppointmentStatus status;
 
-	@ManyToOne(fetch=FetchType.EAGER,targetEntity = Patient.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Patient.class)
 	@JoinColumn(name = "mrnum")
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="mrnum")
-	@JsonProperty(value = "mrnum")
-	@JsonIdentityReference(alwaysAsId = true)
+//	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "mrnum")
+//	@JsonProperty(value = "mrnum")
+//	@JsonIdentityReference(alwaysAsId = true)
 	private Patient patient;
 
-	@ManyToOne(fetch=FetchType.EAGER, targetEntity= HospitalStaff.class)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = HospitalStaff.class)
 	@JoinColumn(name = "email")
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="email")
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
 	@JsonProperty(value = "email")
 	@JsonIdentityReference(alwaysAsId = true)
 	private HospitalStaff hospitalStaff;
@@ -74,6 +73,7 @@ public class Appointment {
 		this.lastMedication = lastMedication;
 		this.patient = patient;
 		this.hospitalStaff = hospitalStaff;
+		this.status = AppointmentStatus.PENDING;
 	}
 
 	public int getAppID() {
@@ -148,4 +148,11 @@ public class Appointment {
 		this.hospitalStaff = hospitalStaff;
 	}
 
+	public AppointmentStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(AppointmentStatus status) {
+		this.status = status;
+	}
 }
