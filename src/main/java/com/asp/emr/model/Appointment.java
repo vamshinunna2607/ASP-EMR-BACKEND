@@ -51,9 +51,9 @@ public class Appointment {
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = HospitalStaff.class)
 	@JoinColumn(name = "email")
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
-	@JsonProperty(value = "email")
-	@JsonIdentityReference(alwaysAsId = true)
+//	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
+//	@JsonProperty(value = "email")
+//	@JsonIdentityReference(alwaysAsId = true)
 	private HospitalStaff hospitalStaff;
 
 	public Appointment() {

@@ -13,7 +13,7 @@ public class PatientDaoImpl implements PatientDao {
 
 	@Autowired
 	PatientRepository patientRepository;
-	
+
 	@Override
 	public List<Patient> getAllPatients() {
 		return this.patientRepository.findAll();
@@ -22,6 +22,11 @@ public class PatientDaoImpl implements PatientDao {
 	@Override
 	public void addPatient(Patient patient) {
 		this.patientRepository.save(patient);
+	}
+
+	@Override
+	public Patient getPatientDetails(int mrNum) {
+		return this.patientRepository.findById(mrNum).orElseThrow(RuntimeException::new);
 	}
 
 }

@@ -31,8 +31,9 @@ public class AppointmentController {
 
 	@GetMapping("/appointment/date/{appDate}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<Appointment> findByDate(@PathVariable("appDate") Date date) {
-		return appointmentService.findByDate(date);
+	public List<Appointment> findByDate(@PathVariable("appDate") long date) {
+		Date searchDate = new Date(date);
+		return appointmentService.findByDate(searchDate);
 	}
 
 	@GetMapping("/today")

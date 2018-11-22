@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asp.emr.model.Patient;
@@ -22,16 +23,23 @@ public class PatientController {
 
 	@Autowired
 	PatientService patientService;
-		
+
 	@RequestMapping(value = "/addPatient", method = RequestMethod.POST)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public void addPatient(@RequestBody Patient patient) {
 		this.patientService.addPatient(patient);
 	}
-	
+
+	@GetMapping("/{mrNum}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public Patient getPatientDetails(@PathVariable int mrNum) {
+		System.out.println(mrNum);
+		return patientService.getPatientDetails(mrNum);
+	}
+
 	@GetMapping("/allPatients")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<Patient> getAllPatients( ) {
+	public List<Patient> getAllPatients() {
 		return this.patientService.getAllPatients();
 	}
 }
