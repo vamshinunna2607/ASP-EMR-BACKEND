@@ -8,10 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan({"com.asp.emr","controller"})
-
 public class AspemrApplication {
 
 	public static void main(String[] args) {

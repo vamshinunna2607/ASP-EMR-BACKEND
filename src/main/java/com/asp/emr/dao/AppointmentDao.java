@@ -9,5 +9,5 @@ public interface AppointmentDao {
 
 	public Appointment findAppointment(int id);
 	public List<Appointment> findByDate(Date date);
-	public void createAppointment(Appointment appointment);
+	public Appointment createAppointment(Appointment appointment);
 }

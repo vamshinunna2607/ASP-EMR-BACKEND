@@ -1,6 +1,7 @@
 package com.asp.emr.controller;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asp.emr.model.Appointment;
@@ -43,7 +45,15 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/createAppointment")
-	public void createAppointment(@RequestBody Appointment appointment) {
-		appointmentService.createAppointment(appointment);
+	@CrossOrigin(origins = "http://localhost:4200")
+	public Appointment createAppointment(@RequestBody Appointment appointment) {
+		return appointmentService.createAppointment(appointment);
+	}
+
+	@GetMapping("check")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public boolean checkAppointmentValid(@RequestParam long date, @RequestParam Time time,
+			@RequestParam String docEmail) {
+		return appointmentService.isValidAppointment(new Date(date), time, docEmail);
 	}
 }

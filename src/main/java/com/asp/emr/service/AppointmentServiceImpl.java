@@ -1,6 +1,7 @@
 package com.asp.emr.service;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Override
 	public List<Appointment> findByDate(Date date) {
-		
+
 		return appointmentDao.findByDate(date);
 	}
 
 	@Override
-	public void createAppointment(Appointment appointment) {
-		appointmentDao.createAppointment(appointment);		
+	public Appointment createAppointment(Appointment appointment) {
+		return appointmentDao.createAppointment(appointment);
+	}
+
+	@Override
+	public boolean isValidAppointment(Date date, Time time, String docEmail) {
+		return false;
 	}
 
 }
