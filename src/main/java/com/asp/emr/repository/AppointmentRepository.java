@@ -1,6 +1,7 @@
 package com.asp.emr.repository;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 
 	@Query(nativeQuery=true,value="select * from test.appointments where date = ?1")
 	public List<Appointment> findByDate(Date date);
+	
+	@Query(nativeQuery=true,value="select count(*) from test.appointments where date = ?1 and time =?2 and email = ?3")
+	public int isValidAppointment(Date date, Time time, String docEmail);
 }

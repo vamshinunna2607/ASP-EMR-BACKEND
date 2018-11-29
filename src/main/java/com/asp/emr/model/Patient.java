@@ -30,23 +30,9 @@ public class Patient {
 	@Column
 	private String gender;
 	@Column
-	private String genderIdentity;
-	@Column
-	private String occupation;
-	@Column
-	private String sexOrientation;
-	@Column
 	private String maritalStatus;
 	@Column
-	private String preferredLanguage;
-	@Column
-	private String communicationPreferences;
-	@Column
 	private String disabilityStatus;
-	@Column
-	private Date firstVisit;
-	@Column
-	private int SSN;
 	@Column
 	private String addressline1;
 	@Column
@@ -58,20 +44,45 @@ public class Patient {
 	@Column
 	private String state;
 	@Column
-	private int homeTelephone;
-	@Column
 	private int mobileNo;
 	@Column
 	private String Kin_First;
 	@Column
 	private String Kin_Last;
 	@Column
-	private String Kin_Address;
-	@Column
 	private String Kin_Telephone;
 	@Column
 	private String relationship;
+
+	public Patient() {
+	}
 	
+	public Patient(int mRnum, String firstName, String lastName, String salutation, Date dob, String race,
+			String ethnicity, String gender, String maritalStatus, String disabilityStatus, String addressline1,
+			String addressline2, int zipCode, String city, String state, int mobileNo, String kin_First,
+			String kin_Last, String kin_Telephone, String relationship) {
+		super();
+		MRnum = mRnum;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.salutation = salutation;
+		this.dob = dob;
+		this.race = race;
+		this.ethnicity = ethnicity;
+		this.gender = gender;
+		this.maritalStatus = maritalStatus;
+		this.disabilityStatus = disabilityStatus;
+		this.addressline1 = addressline1;
+		this.addressline2 = addressline2;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.state = state;
+		this.mobileNo = mobileNo;
+		Kin_First = kin_First;
+		Kin_Last = kin_Last;
+		Kin_Telephone = kin_Telephone;
+		this.relationship = relationship;
+	}
 	public int getMRnum() {
 		return MRnum;
 	}
@@ -120,41 +131,12 @@ public class Patient {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getGenderIdentity() {
-		return genderIdentity;
-	}
-	public void setGenderIdentity(String genderIdentity) {
-		this.genderIdentity = genderIdentity;
-	}
-	public String getOccupation() {
-		return occupation;
-	}
-	public void setOccupation(String occupation) {
-		this.occupation = occupation;
-	}
-	public String getSexOrientation() {
-		return sexOrientation;
-	}
-	public void setSexOrientation(String sexOrientation) {
-		this.sexOrientation = sexOrientation;
-	}
+	
 	public String getMaritalStatus() {
 		return maritalStatus;
 	}
 	public void setMaritalStatus(String maritalStatus) {
 		this.maritalStatus = maritalStatus;
-	}
-	public String getPreferredLanguage() {
-		return preferredLanguage;
-	}
-	public void setPreferredLanguage(String preferredLanguage) {
-		this.preferredLanguage = preferredLanguage;
-	}
-	public String getCommunicationPreferences() {
-		return communicationPreferences;
-	}
-	public void setCommunicationPreferences(String communicationPreferences) {
-		this.communicationPreferences = communicationPreferences;
 	}
 	public String getDisabilityStatus() {
 		return disabilityStatus;
@@ -162,18 +144,7 @@ public class Patient {
 	public void setDisabilityStatus(String disabilityStatus) {
 		this.disabilityStatus = disabilityStatus;
 	}
-	public Date getFirstVisit() {
-		return firstVisit;
-	}
-	public void setFirstVisit(Date firstVisit) {
-		this.firstVisit = firstVisit;
-	}
-	public int getSSN() {
-		return SSN;
-	}
-	public void setSSN(int sSN) {
-		SSN = sSN;
-	}
+	
 	public String getAddressline1() {
 		return addressline1;
 	}
@@ -204,12 +175,6 @@ public class Patient {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getHomeTelephone() {
-		return homeTelephone;
-	}
-	public void setHomeTelephone(int homeTelephone) {
-		this.homeTelephone = homeTelephone;
-	}
 	public int getMobileNo() {
 		return mobileNo;
 	}
@@ -227,12 +192,6 @@ public class Patient {
 	}
 	public void setKin_Last(String kin_Last) {
 		Kin_Last = kin_Last;
-	}
-	public String getKin_Address() {
-		return Kin_Address;
-	}
-	public void setKin_Address(String kin_Address) {
-		Kin_Address = kin_Address;
 	}
 	public String getKin_Telephone() {
 		return Kin_Telephone;

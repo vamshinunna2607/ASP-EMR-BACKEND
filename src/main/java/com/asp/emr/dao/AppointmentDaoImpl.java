@@ -1,6 +1,7 @@
 package com.asp.emr.dao;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,10 @@ public class AppointmentDaoImpl implements AppointmentDao {
 	@Override
 	public Appointment createAppointment(Appointment appointment) {
 		return appointmentsRepository.save(appointment);
+	}
+
+	@Override
+	public int isValidAppointment(Date date, Time time, String docEmail) {
+		return appointmentsRepository.isValidAppointment(date, time, docEmail);
 	}
 }

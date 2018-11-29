@@ -35,7 +35,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Override
 	public boolean isValidAppointment(Date date, Time time, String docEmail) {
-		return false;
+		int appointmentCount =  appointmentDao.isValidAppointment(date, time, docEmail);
+		
+		if(appointmentCount == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

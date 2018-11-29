@@ -50,7 +50,7 @@ public class AppointmentController {
 		return appointmentService.createAppointment(appointment);
 	}
 
-	@GetMapping("check")
+	@GetMapping("/check")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public boolean checkAppointmentValid(@RequestParam long date, @RequestParam Time time,
 			@RequestParam String docEmail) {
