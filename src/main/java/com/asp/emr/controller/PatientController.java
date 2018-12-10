@@ -1,12 +1,12 @@
-package com.asp.emr.controller;
+	package com.asp.emr.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asp.emr.model.Patient;
+import com.asp.emr.model.User;
 import com.asp.emr.service.PatientService;
-import com.asp.emr.service.PatientServiceImpl;
 
 @RestController
 @RequestMapping("/patient")
@@ -26,15 +26,30 @@ public class PatientController {
 
 	@RequestMapping(value = "/addPatient", method = RequestMethod.POST)
 	@CrossOrigin(origins = "http://localhost:4200")
-	public void addPatient(@RequestBody Patient patient) {
-		this.patientService.addPatient(patient);
+	public User addPatient(@RequestBody Patient patient) {
+		return this.patientService.addPatient(patient);
 	}
 
 	@GetMapping("/{mrNum}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public Patient getPatientDetails(@PathVariable int mrNum) {
-		System.out.println(mrNum);
-		return patientService.getPatientDetails(mrNum);
+	public List<Patient> getPatientDetails(@PathVariable int mrNum) {
+		List<Patient> patientList = new ArrayList<Patient>();
+		patientList.add(patientService.getPatientDetails(mrNum));
+		return patientList;
+	}
+	
+	@GetMapping("phone/{phone}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Patient> getPatientDetails(@PathVariable long phone) {
+		List<Patient> patientList = new ArrayList<Patient>();
+		patientList.add(patientService.getPatientDetails(phone));
+		return patientList;
+	}
+
+	@GetMapping("/get")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Patient> getPatientDetailsUsingNameAndDOB(@RequestParam String firstName, @RequestParam String lastName) {
+		return patientService.getPatientDetails(firstName, lastName);
 	}
 
 	@GetMapping("/allPatients")
@@ -42,4 +57,11 @@ public class PatientController {
 	public List<Patient> getAllPatients() {
 		return this.patientService.getAllPatients();
 	}
+	
+	@RequestMapping(value="/login")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public Patient findUserByPhone(@RequestParam long phone) {
+		return patientService.findUserByPhone(phone) ;
+	}
+
 }

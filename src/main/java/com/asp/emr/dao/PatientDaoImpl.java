@@ -16,17 +16,58 @@ public class PatientDaoImpl implements PatientDao {
 
 	@Override
 	public List<Patient> getAllPatients() {
-		return this.patientRepository.findAll();
+		try {
+			return this.patientRepository.findAll();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override
-	public void addPatient(Patient patient) {
+	public String addPatient(Patient patient) {
 		this.patientRepository.save(patient);
+		return "success";
 	}
 
 	@Override
 	public Patient getPatientDetails(int mrNum) {
-		return this.patientRepository.findById(mrNum).orElseThrow(RuntimeException::new);
+		try {
+			return this.patientRepository.findById(mrNum).orElseThrow(RuntimeException::new);
+
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
+	@Override
+	public List<Patient> getPatientDetails(String kin_first, String kin_last) {
+		try {
+			kin_first = kin_first + "%";
+			kin_last = kin_last + "%";
+			return this.patientRepository.findByNameAndDob(kin_first, kin_last);
+
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public Patient findUserByPhone(long phone) {
+		try {
+			return this.patientRepository.findByPhone(phone);
+
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public Patient getPatientDetails(long phone) {
+		try {
+			return this.patientRepository.findByPhone(phone);
+
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

@@ -23,4 +23,9 @@ public class SoapServiceImpl implements SoapService {
 		return soapRepo.findByMrNum(mrNum);
 	}
 
+	@Override
+	public List<Soap> getSoapNotes(long phone) {
+		return soapRepo.findSoapByPhone(phone);
+	}
+
 }

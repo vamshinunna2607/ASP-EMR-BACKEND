@@ -37,6 +37,7 @@ public class Appointment {
 	private String lastMedication;
 	@Column
 	private AppointmentStatus status;
+	//private long mobileNo;
 
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Patient.class)
 	@JoinColumn(name = "mrnum")

@@ -11,4 +11,7 @@ public interface StaffRepository extends JpaRepository<HospitalStaff, String> {
 
 	@Query(value = "select * from medicalstaff_registration", nativeQuery = true)
 	List<HospitalStaff> findAll();
+
+	@Query(value = "select * from medicalstaff_registration where mobile_no = ?1", nativeQuery = true)
+	HospitalStaff findUserByPhone(int mobile_no);
 }

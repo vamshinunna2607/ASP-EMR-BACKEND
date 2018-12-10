@@ -10,5 +10,9 @@ public interface StaffDao {
 	public List<HospitalStaff> getStaffData();
 	
 	Optional<HospitalStaff> findUserByEmail(String email, String password);
+
+	public String addStaff(HospitalStaff hospitalStaff);
+
+	public HospitalStaff findUserByPhone(int phone);
 	
 }

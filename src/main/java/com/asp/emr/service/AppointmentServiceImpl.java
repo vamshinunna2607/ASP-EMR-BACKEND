@@ -29,20 +29,46 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Appointment createAppointment(Appointment appointment) {
-		return appointmentDao.createAppointment(appointment);
+	public Object createAppointment(Appointment appointment, boolean update) {
+		try {
+			if (!update) {
+				boolean flag = appointmentDao.checkForOverlappingAppointments(appointment.getPatient().getMRnum(),
+						appointment.getDate());
+				if (flag) {
+					return appointmentDao.createAppointment(appointment);
+				}
+			} else {
+				return appointmentDao.createAppointment(appointment);
+			}
+		} catch (Exception e) {
+			return "error";
+		}
+		return "cantBook";
 	}
 
 	@Override
 	public boolean isValidAppointment(Date date, Time time, String docEmail) {
-		int appointmentCount =  appointmentDao.isValidAppointment(date, time, docEmail);
-		
-		if(appointmentCount == 0) {
+		int appointmentCount = appointmentDao.isValidAppointment(date, time, docEmail);
+		if (appointmentCount == 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Appointment> findByMrno(long mrno) {
+		return appointmentDao.findByMrno(mrno);
+	}
+
+	@Override
+	public List<Appointment> getAppointmentsForCurrentDate() {
+		return appointmentDao.getAppointmentsForCurrentDate();
+	}
+
+	@Override
+	public List<Appointment> findByDate(Date date, long phone) {
+		return appointmentDao.findByDateAndPhone(date, phone);
 	}
 
 }

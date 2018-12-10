@@ -2,7 +2,6 @@ package com.asp.emr.controller;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,17 +36,35 @@ public class AppointmentController {
 		Date searchDate = new Date(date);
 		return appointmentService.findByDate(searchDate);
 	}
+	
+	@GetMapping("/appointment/mrno/{mrno}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Appointment> findByMrNo(@PathVariable("mrno") long mrno) {
+		return appointmentService.findByMrno(mrno);
+	}
+	
+	@GetMapping("/currentDate")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Appointment> getAppointmentsForCurrentDate() {
+		return appointmentService.getAppointmentsForCurrentDate();
+	}
 
 	@GetMapping("/today")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Appointment> getAppointmentsForToday() {
 		return appointmentService.findByDate(new Date(System.currentTimeMillis()));
 	}
-
-	@PostMapping("/createAppointment")
+	
+	@GetMapping("/today/{phone}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public Appointment createAppointment(@RequestBody Appointment appointment) {
-		return appointmentService.createAppointment(appointment);
+	public List<Appointment> getAppointmentsForTodayForADoctor(@PathVariable("phone") long phone) {
+		return appointmentService.findByDate(new Date(System.currentTimeMillis()), phone);
+	}
+
+	@PostMapping("/createAppointment/{flag}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public Object createAppointment(@RequestBody Appointment appointment, boolean flag) {
+		return appointmentService.createAppointment(appointment, flag);
 	}
 
 	@GetMapping("/check")

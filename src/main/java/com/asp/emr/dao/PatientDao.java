@@ -8,8 +8,13 @@ public interface PatientDao {
 
 	public List<Patient> getAllPatients();
 
-	public void addPatient(Patient patient);
+	public String addPatient(Patient patient);
 
 	public Patient getPatientDetails(int mrNum);
 
+	public List<Patient> getPatientDetails(String firstName, String lastName);
+
+	public Patient findUserByPhone(long phone);
+
+	public Patient getPatientDetails(long phone);
 }

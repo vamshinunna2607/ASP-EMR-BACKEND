@@ -17,25 +17,77 @@ public class AppointmentDaoImpl implements AppointmentDao {
 	AppointmentRepository appointmentsRepository;
 
 	public Appointment findAppointment(int id) {
-		return appointmentsRepository.getOne(id);
+		try {
+			return appointmentsRepository.getOne(id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override
 	public List<Appointment> findByDate(Date date) {
-		List<Appointment> list = appointmentsRepository.findByDate(date);
-		for(Appointment app:list) {
-			System.out.println(app.getAppID());
+		try {
+			List<Appointment> list = appointmentsRepository.findByDate(date);
+			for (Appointment app : list) {
+				System.out.println(app.getAppID());
+			}
+			return list;
+		} catch (Exception e) {
+			return null;
+
 		}
-		return list;
+
 	}
 
 	@Override
 	public Appointment createAppointment(Appointment appointment) {
-		return appointmentsRepository.save(appointment);
+		try {
+			return appointmentsRepository.save(appointment);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override
 	public int isValidAppointment(Date date, Time time, String docEmail) {
-		return appointmentsRepository.isValidAppointment(date, time, docEmail);
+		try {
+			return appointmentsRepository.isValidAppointment(date, time, docEmail);
+
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public boolean checkForOverlappingAppointments(int mRnum, Date date) {
+		try {
+			List<Appointment> appointmentList = appointmentsRepository.findAppointmentByDateAndMrNumber(mRnum, date);
+			return appointmentList.isEmpty();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public List<Appointment> findByMrno(long mrno) {
+		try {
+			return appointmentsRepository.findbyMrno(mrno);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Appointment> getAppointmentsForCurrentDate() {
+		try {
+			return appointmentsRepository.getAppointmentsForCurrentDate();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Appointment> findByDateAndPhone(Date date, long phone) {
+		return appointmentsRepository.findByDateAndPhone(date, phone);
 	}
 }

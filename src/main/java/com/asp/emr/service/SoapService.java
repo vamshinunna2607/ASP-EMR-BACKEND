@@ -9,4 +9,6 @@ public interface SoapService {
 	void addSoapNote(Soap soap);
 	
 	List<Soap> getSoapNotes(int mrNum);
+
+	List<Soap> getSoapNotes(long phone);
 }

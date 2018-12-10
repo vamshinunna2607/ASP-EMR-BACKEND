@@ -12,8 +12,15 @@ public interface AppointmentService {
 
 	public List<Appointment> findByDate(Date date);
 
-	public Appointment createAppointment(Appointment appointment);
+	public Object createAppointment(Appointment appointment, boolean flag);
 
 	public boolean isValidAppointment(Date date, Time time, String docEmail);
+
+	public List<Appointment> findByMrno(long mrno);
+
+	public List<Appointment> getAppointmentsForCurrentDate();
+
+	public List<Appointment> findByDate(Date date, long phone);
+
 
 }

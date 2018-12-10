@@ -26,10 +26,16 @@ public class SoapController {
 	public void addSoapNote(@RequestBody Soap soapNote) {
 		soapService.addSoapNote(soapNote);
 	}
-	
+
 	@GetMapping("{mrNum}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Soap> getSoapNote(@PathVariable int mrNum) {
-		return soapService.getSoapNotes(mrNum)
-;	}
+		return soapService.getSoapNotes(mrNum);
+	}
+	
+	@GetMapping("phone/{phone}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Soap> getSoapNoteUsingPhone(@PathVariable long phone) {
+		return soapService.getSoapNotes(phone);
+	}
 }
