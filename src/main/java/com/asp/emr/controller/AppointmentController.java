@@ -36,13 +36,13 @@ public class AppointmentController {
 		Date searchDate = new Date(date);
 		return appointmentService.findByDate(searchDate);
 	}
-	
+
 	@GetMapping("/appointment/mrno/{mrno}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Appointment> findByMrNo(@PathVariable("mrno") long mrno) {
 		return appointmentService.findByMrno(mrno);
 	}
-	
+
 	@GetMapping("/currentDate")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Appointment> getAppointmentsForCurrentDate() {
@@ -54,7 +54,7 @@ public class AppointmentController {
 	public List<Appointment> getAppointmentsForToday() {
 		return appointmentService.findByDate(new Date(System.currentTimeMillis()));
 	}
-	
+
 	@GetMapping("/today/{phone}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Appointment> getAppointmentsForTodayForADoctor(@PathVariable("phone") long phone) {
@@ -63,8 +63,14 @@ public class AppointmentController {
 
 	@PostMapping("/createAppointment/{flag}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public Object createAppointment(@RequestBody Appointment appointment, boolean flag) {
-		return appointmentService.createAppointment(appointment, flag);
+	public Appointment createAppointment(@RequestBody Appointment appointment, boolean flag) {
+		Appointment app = appointmentService.createAppointment(appointment, flag);
+		if (null == app) {
+			Appointment appoi = new Appointment();
+			appoi.setAppID(0);
+			return appoi;
+		}
+		return app;
 	}
 
 	@GetMapping("/check")

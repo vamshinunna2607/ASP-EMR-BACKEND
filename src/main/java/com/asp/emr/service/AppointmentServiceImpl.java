@@ -29,7 +29,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Object createAppointment(Appointment appointment, boolean update) {
+	public Appointment createAppointment(Appointment appointment, boolean update) {
 		try {
 			if (!update) {
 				boolean flag = appointmentDao.checkForOverlappingAppointments(appointment.getPatient().getMRnum(),
@@ -41,9 +41,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 				return appointmentDao.createAppointment(appointment);
 			}
 		} catch (Exception e) {
-			return "error";
+			return null;
 		}
-		return "cantBook";
+		return null;
 	}
 
 	@Override

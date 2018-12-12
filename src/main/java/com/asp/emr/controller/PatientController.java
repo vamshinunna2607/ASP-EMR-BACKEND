@@ -1,4 +1,4 @@
-	package com.asp.emr.controller;
+package com.asp.emr.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,13 @@ public class PatientController {
 	@RequestMapping(value = "/addPatient", method = RequestMethod.POST)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public User addPatient(@RequestBody Patient patient) {
-		return this.patientService.addPatient(patient);
+		User user = this.patientService.addPatient(patient);
+		if (null == user) {
+			User user2 = new User();
+			user2.setUserName("ERROR");
+			return user2;
+		}
+		return user;
 	}
 
 	@GetMapping("/{mrNum}")
@@ -37,7 +43,7 @@ public class PatientController {
 		patientList.add(patientService.getPatientDetails(mrNum));
 		return patientList;
 	}
-	
+
 	@GetMapping("phone/{phone}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Patient> getPatientDetails(@PathVariable long phone) {
@@ -48,7 +54,8 @@ public class PatientController {
 
 	@GetMapping("/get")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public List<Patient> getPatientDetailsUsingNameAndDOB(@RequestParam String firstName, @RequestParam String lastName) {
+	public List<Patient> getPatientDetailsUsingNameAndDOB(@RequestParam String firstName,
+			@RequestParam String lastName) {
 		return patientService.getPatientDetails(firstName, lastName);
 	}
 
@@ -57,11 +64,11 @@ public class PatientController {
 	public List<Patient> getAllPatients() {
 		return this.patientService.getAllPatients();
 	}
-	
-	@RequestMapping(value="/login")
+
+	@RequestMapping(value = "/login")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public Patient findUserByPhone(@RequestParam long phone) {
-		return patientService.findUserByPhone(phone) ;
+		return patientService.findUserByPhone(phone);
 	}
 
 }

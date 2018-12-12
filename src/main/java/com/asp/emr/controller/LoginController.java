@@ -21,6 +21,11 @@ public class LoginController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public User findUserByPasswordAndPhone(@RequestParam String phone, @RequestParam String password) {
 		User user = repo.findUserByPhoneAndPassword(Integer.parseInt(phone), password);
+		if (null == user) {
+			User user2 = new User();
+			user2.setUserName("ERROR");
+			return user2;
+		}
 		return user;
 	}
 }

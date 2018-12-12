@@ -12,7 +12,7 @@ public interface AppointmentService {
 
 	public List<Appointment> findByDate(Date date);
 
-	public Object createAppointment(Appointment appointment, boolean flag);
+	public Appointment createAppointment(Appointment appointment, boolean flag);
 
 	public boolean isValidAppointment(Date date, Time time, String docEmail);
 

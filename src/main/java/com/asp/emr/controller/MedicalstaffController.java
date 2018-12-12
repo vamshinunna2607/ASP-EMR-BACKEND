@@ -37,6 +37,13 @@ public class MedicalstaffController {
 	@RequestMapping(value = "/addStaff", method = RequestMethod.POST)
 	@CrossOrigin(origins = "http://localhost:4200")
 	public User addStaff(@RequestBody HospitalStaff hospitalStaff) {
-		return this.staffService.addStaff(hospitalStaff);
+		try {
+			User user = this.staffService.addStaff(hospitalStaff);
+			return user;
+		} catch (Exception e) {
+			User user2 = new User();
+			user2.setUserName("ERROR");
+			return user2;
+		}
 	}
 }
