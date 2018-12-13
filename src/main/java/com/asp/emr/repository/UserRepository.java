@@ -10,5 +10,5 @@ import com.asp.emr.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query(value = "SELECT * FROM USER WHERE USER_PHONE =?1 AND USER_PASSWORD = ?2", nativeQuery = true)
-	User findUserByPhoneAndPassword(int phone, String password);
+	User findUserByPhoneAndPassword(long l, String password);
 }

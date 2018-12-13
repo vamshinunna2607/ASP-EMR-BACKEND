@@ -20,7 +20,7 @@ public class LoginController {
 	@GetMapping("/")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public User findUserByPasswordAndPhone(@RequestParam String phone, @RequestParam String password) {
-		User user = repo.findUserByPhoneAndPassword(Integer.parseInt(phone), password);
+		User user = repo.findUserByPhoneAndPassword(Long.parseLong(phone), password);
 		if (null == user) {
 			User user2 = new User();
 			user2.setUserName("ERROR");

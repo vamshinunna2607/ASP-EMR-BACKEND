@@ -56,6 +56,7 @@ public class StaffServiceImpl implements StaffService {
 		try {
 			staffDao.addStaff(hospitalStaff);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 		User user = new User();
