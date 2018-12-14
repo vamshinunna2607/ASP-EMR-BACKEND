@@ -41,6 +41,13 @@ public class PatientController {
 	public List<Patient> getPatientDetails(@PathVariable int mrNum) {
 		List<Patient> patientList = new ArrayList<Patient>();
 		patientList.add(patientService.getPatientDetails(mrNum));
+		if (patientList.get(0) == null) {
+			List<Patient> list2 = new ArrayList<>();
+			Patient p = new Patient();
+			p.setFirstName("ERROR");
+			list2.add(p);
+			return list2;
+		}
 		return patientList;
 	}
 
@@ -56,7 +63,15 @@ public class PatientController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Patient> getPatientDetailsUsingNameAndDOB(@RequestParam String firstName,
 			@RequestParam String lastName) {
-		return patientService.getPatientDetails(firstName, lastName);
+		List<Patient> list = patientService.getPatientDetails(firstName, lastName);
+		if (null == list) {
+			List<Patient> list2 = new ArrayList<>();
+			Patient p = new Patient();
+			p.setFirstName("ERROR");
+			list2.add(p);
+			return list2;
+		}
+		return list;
 	}
 
 	@GetMapping("/allPatients")
