@@ -31,11 +31,6 @@ public class LoginController {
 			user2.setUserName("ERROR");
 			return user2;
 		}
-		
-		if(user.getUserType().equals("STAFF")) {
-			user.setEmail(repoStaff.getEmail(user.getUserPhone()));
-		}
-		
 		return user;
 	}
 }

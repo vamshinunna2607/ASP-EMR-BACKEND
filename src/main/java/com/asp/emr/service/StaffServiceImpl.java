@@ -60,11 +60,12 @@ public class StaffServiceImpl implements StaffService {
 			return null;
 		}
 		User user = new User();
-		user.setUserPhone((int) hospitalStaff.getMobileNo());
+		user.setUserPhone(hospitalStaff.getMobileNo());
 		user.setUserType("STAFF");
 		user.setUserName(hospitalStaff.getFirstName() + " " + hospitalStaff.getLastName());
 		String password = util.generatePassword(8, ALPHA + NUMERIC + SPECIAL_CHARS);
 		user.setPassword(password);
+		user.setEmail(hospitalStaff.getEmail());
 		try {
 			userDao.addUser(user);
 			return user;
