@@ -63,7 +63,7 @@ public class AppointmentController {
 
 	@PostMapping("/createAppointment/{flag}")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public Appointment createAppointment(@RequestBody Appointment appointment, boolean flag) {
+	public Appointment createAppointment(@RequestBody Appointment appointment, @PathVariable("flag") boolean flag) {
 		Appointment app = appointmentService.createAppointment(appointment, flag);
 		if (null == app) {
 			Appointment appoi = new Appointment();
