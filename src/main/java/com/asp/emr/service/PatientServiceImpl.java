@@ -10,6 +10,7 @@ import com.asp.emr.dao.PatientDao;
 import com.asp.emr.dao.UserDao;
 import com.asp.emr.model.Patient;
 import com.asp.emr.model.User;
+import com.asp.emr.repository.UserRepository;
 
 @Component
 public class PatientServiceImpl implements PatientService {
@@ -22,6 +23,9 @@ public class PatientServiceImpl implements PatientService {
 
 	@Autowired
 	Util util;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	private static final String ALPHA = "abcdefghijklmnopqrstuvwxyz";
 	private static final String NUMERIC = "0123456789";
@@ -53,6 +57,22 @@ public class PatientServiceImpl implements PatientService {
 		}
 	}
 
+	@Override
+	public Patient updatePatient(Patient patient) {
+		User user;
+		try {
+		Patient existingPatient = patientDao.getPatientDetails(patient.getMRnum());
+		user = userRepository.findUserByPhone(existingPatient.getMobileNo());
+		patientDao.addPatient(patient);
+		user.setUserPhone(patient.getMobileNo());
+		userDao.addUser(user);
+		System.out.println("user object: "+user);
+		return patient;
+		}catch (Exception e) {
+			return null;
+		}
+	}
+	
 	@Override
 	public Patient getPatientDetails(int mrNum) {
 		return this.patientDao.getPatientDetails(mrNum);

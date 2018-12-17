@@ -36,6 +36,18 @@ public class PatientController {
 		return user;
 	}
 
+	@RequestMapping(value = "/updatePatient", method = RequestMethod.PUT)
+	@CrossOrigin(origins = "http://localhost:4200")
+	public Patient updatePatient(@RequestBody Patient patient) {
+		try {
+		patient = patientService.updatePatient(patient);
+		return patient;
+		}catch(Exception e) {
+			return null;
+		}
+		
+	}
+	
 	@GetMapping("/{mrNum}")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Patient> getPatientDetails(@PathVariable int mrNum) {

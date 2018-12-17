@@ -9,7 +9,9 @@ public interface PatientService {
 
 	public List<Patient> getAllPatients();
 	
-	public User addPatient(Patient patient) ;
+	public User addPatient(Patient patient);
+	
+	public Patient updatePatient(Patient patient);
 	
 	public Patient getPatientDetails(long phone);
 

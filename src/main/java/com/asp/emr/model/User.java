@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity(name = "user")
+@DynamicUpdate
 public class User {
 
 	@Column(updatable = false, nullable = false, name = "USER_ID")
