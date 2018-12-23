@@ -51,7 +51,6 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	@Transactional
 	public User addStaff(HospitalStaff hospitalStaff) {
 		try {
 			staffDao.addStaff(hospitalStaff);
@@ -68,11 +67,11 @@ public class StaffServiceImpl implements StaffService {
 		user.setEmail(hospitalStaff.getEmail());
 		try {
 			userDao.addUser(user);
-			return user;
 		} catch (Exception e) {
 			return null;
 		}
-
+		user.setPassword(password);
+		return user;
 	}
 
 	@Override
