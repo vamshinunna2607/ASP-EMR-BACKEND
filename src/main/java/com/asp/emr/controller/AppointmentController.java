@@ -60,6 +60,14 @@ public class AppointmentController {
 	public List<Appointment> getAppointmentsForTodayForADoctor(@PathVariable("phone") long phone) {
 		return appointmentService.findByDate(new Date(System.currentTimeMillis()), phone);
 	}
+	
+	//Search an appointment for a Doctor on a specific day
+	@GetMapping("/checkAppointments/{date}/{phone}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Appointment> getAppointmentsForADoctorSpecificDate(@PathVariable Date date, @PathVariable("phone") long phone) {
+		return appointmentService.findByDate(date, phone);
+	}
+	
 
 	@PostMapping("/createAppointment/{flag}")
 	@CrossOrigin(origins = "http://localhost:4200")
