@@ -14,5 +14,7 @@ public interface PatientRepository extends JpaRepository<Patient, Integer>  {
 
 	@Query(value = "select * from patient_registration where mobile_no = ?1", nativeQuery = true)
 	Patient findByPhone(long mobile_no);
-
+	
+	@Query(value = "select dob from patient_registration where mobile_no = ?1", nativeQuery = true)
+	String getDOB(long userPhone);
 }

@@ -17,4 +17,7 @@ public interface StaffRepository extends JpaRepository<HospitalStaff, String> {
 
 	@Query(value = "select email from medicalstaff_registration where mobile_no = ?1", nativeQuery = true)
 	String getEmail(long userPhone);
+	
+	@Query(value = "select dob from medicalstaff_registration where mobile_no = ?1", nativeQuery = true)
+	String getDOB(long userPhone);
 }
